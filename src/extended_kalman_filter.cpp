@@ -5,13 +5,13 @@
 	> Created Time: Thu Mar  7 19:39:14 2019
  ************************************************************************/
 
-#include <iostream>
-#include <random>
-#include <cmath>
-#include <Eigen/Eigen>
-#include <opencv2/opencv.hpp>
-#include <opencv2/core/core.hpp>
-#include <opencv2/highgui/highgui.hpp>
+#include<iostream>
+#include<random>
+#include<cmath>
+#include<Eigen/Eigen>
+#include<opencv2/opencv.hpp>
+#include<opencv2/core/core.hpp>
+#include<opencv2/highgui/highgui.hpp>
 
 #define SIM_TIME 50.0
 #define DT 0.1
@@ -62,19 +62,19 @@ Eigen::Matrix<float, 2, 4> jacobH(){
 };
 
 void ekf_estimation(Eigen::Vector4f& xEst, Eigen::Matrix4f& PEst,
-  Eigen::Vector2f z, Eigen::Vector2f u,
-  Eigen::Matrix4f Q, Eigen::Matrix2f R){
-    Eigen::Vector4f xPred = motion_model(xEst, u);
-    Eigen::Matrix4f jF = jacobF(xPred, u);
-    Eigen::Matrix4f PPred = jF * PEst * jF.transpose() + Q;
+                    Eigen::Vector2f z, Eigen::Vector2f u,
+                    Eigen::Matrix4f Q, Eigen::Matrix2f R){
+  Eigen::Vector4f xPred = motion_model(xEst, u);
+  Eigen::Matrix4f jF = jacobF(xPred, u);
+  Eigen::Matrix4f PPred = jF * PEst * jF.transpose() + Q;
 
-    Eigen::Matrix<float, 2, 4> jH = jacobH();
-    Eigen::Vector2f zPred = observation_model(xPred);
-    Eigen::Vector2f y = z - zPred;
-    Eigen::Matrix2f S = jH * PPred * jH.transpose() + R;
-    Eigen::Matrix<float, 4, 2> K = PPred * jH.transpose() * S.inverse();
-    xEst = xPred + K * y;
-    PEst = (Eigen::Matrix4f::Identity() - K * jH) * PPred;
+  Eigen::Matrix<float, 2, 4> jH = jacobH();
+  Eigen::Vector2f zPred = observation_model(xPred);
+  Eigen::Vector2f y = z - zPred;
+  Eigen::Matrix2f S = jH * PPred * jH.transpose() + R;
+  Eigen::Matrix<float, 4, 2> K = PPred * jH.transpose() * S.inverse();
+  xEst = xPred + K * y;
+  PEst = (Eigen::Matrix4f::Identity() - K * jH) * PPred;
 };
 
 cv::Point2i cv_offset(

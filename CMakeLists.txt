@@ -11,15 +11,15 @@ set(LIBRARY_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/lib)
 #############################
 
 find_package(Eigen3 REQUIRED)
-include_directories(${EIGEN3_INCLUDE_DIR})
-
 find_package(OpenCV REQUIRED)
+
 include_directories(${EIGEN3_INCLUDE_DIR})
-
-# include_directories(/home/tai/Software/Ipopt-3.12.13/build/include)
-# link_directories(/home/tai/Software/Ipopt-3.12.13/build/lib)
-
 include_directories(./include)
+
+#include_directories(/home/tai/Software/Ipopt-3.12.13/build/include)
+#link_directories(/home/tai/Software/Ipopt-3.12.13/build/lib)
+
+
 
 ##############################
 #Localization
@@ -34,6 +34,18 @@ target_link_libraries(pf ${OpenCV_LIBS} )
 ##############################
 #PathPlanning
 ##############################
+
+add_executable(dijkstra src/dijkstra.cpp)
+target_link_libraries(dijkstra ${OpenCV_LIBS} )
+
+add_executable(astar src/a_star.cpp)
+target_link_libraries(astar ${OpenCV_LIBS} )
+
+add_executable(rrt src/rrt.cpp)
+target_link_libraries(rrt ${OpenCV_LIBS} )
+
+add_executable(rrtstar src/rrt_star.cpp)
+target_link_libraries(rrtstar ${OpenCV_LIBS} )
 
 add_executable(dwa src/dynamic_window_approach.cpp)
 target_link_libraries(dwa ${OpenCV_LIBS} )
@@ -61,5 +73,5 @@ target_link_libraries(lqr ${OpenCV_LIBS})
 add_executable(lqr_full src/lqr_speed_steer_control.cpp)
 target_link_libraries(lqr_full ${OpenCV_LIBS})
 
-# add_executable(mpc src/model_predictive_control.cpp)
-# target_link_libraries(mpc ${OpenCV_LIBS} ipopt)
+#add_executable(mpc src/model_predictive_control.cpp)
+#target_link_libraries(mpc ${OpenCV_LIBS} ipopt)

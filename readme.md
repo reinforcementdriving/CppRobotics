@@ -6,8 +6,8 @@ This is the cpp implementation of the [PythonRobotics](https://github.com/Atsush
 - cmake
 - opencv 3.3
 - Eigen 3
-- [CppAD](https://www.coin-or.org/CppAD/Doc/install.htm) / [IPOPT](https://www.coin-or.org/Ipopt/documentation/node14.html) (*for MPC convex optimization*)
-- ~~ROS~~ (*To make the repo lightweight :)*)
+- [CppAD](https://www.coin-or.org/CppAD/Doc/install.htm) / [IPOPT](https://www.coin-or.org/Ipopt/documentation/node14.html) (*for MPC convex optimization*) [install tips](https://github.com/udacity/CarND-MPC-Quizzes/blob/master/install_Ipopt_CppAD.md)
+- ~~ROS~~ (*~~To make the repo lightweight :)~~. Yet, we may still need it for 3D visualization.*)
 
 ## Build
      $ mkdir build
@@ -27,16 +27,21 @@ Find all the executable files in ***build/bin***.
 * [SLAM](#SLAM)
     * FastSLAM 1.0
 * [Path Planning](#path-planning)
+    * [Dijkstra](#dijkstra)
+    * [A Star](#a-star)
+    * [RRT](#rrt)
     * [Dynamic Window Approach](#dynamic-window-approach)
     * [Model Predictive Trajectory Generator](#model-predictive-trajectory-generator)
     * [Cubic Spline Planner](#cubic-spline-planner)
     * [State Lattice Planner](#state-lattice-planner)
     * [Frenet Frame Trajectory](#frenet-frame-trajectory)
-* [Path Tracking](#path-tracking)
+* [Path Tracking Control](#path-tracking-control)
     * [LQR Sterring Control](#lqr-steering-control)
     * [LQR Speed and Steering Control](#lqr-speed-and-steering-control)
     * [Model Predictive Speed and Steering Control](#mpc-speed-and-steering-control)
-
+* [Aerial Navigation](#aerial-navigation)
+     * Drone 3D Trajectory Following
+     * Rocket Powered Landing
 
 # Localization
 ## Extended Kalman Filter Localization
@@ -62,6 +67,23 @@ Find all the executable files in ***build/bin***.
 [Probabilistic Robotics](http://www.probabilistic-robotics.org/)
 
 # Path Planning
+
+## Dijkstra
+* blue point: the start point
+* red point: the goal point
+<img src="https://ram-lab.com/file/tailei/gif/dijkstra.gif" alt="dijkstra" width="400"/>
+
+## A star
+* blue point: the start point
+* red point: the goal point
+<img src="https://ram-lab.com/file/tailei/gif/a_star.gif" alt="a_star" width="400"/>
+
+## RRT
+* red circle: the start point
+* blue circle: the goal point
+* black circle: obstacles
+<img src="https://ram-lab.com/file/tailei/gif/rrt.gif" alt="rrt" width="400"/>
+
 ## Dynamic Window Approach
 * blue circle: the target point
 * red circle: the robot
@@ -105,7 +127,7 @@ This part is based on the bicycle motion model.
 [Optimal Trajectory Generation for Dynamic Street Scenarios in a Frenet Frame](https://www.researchgate.net/publication/224156269_Optimal_Trajectory_Generation_for_Dynamic_Street_Scenarios_in_a_Frenet_Frame)
 
 
-# Path Tracking
+# Path Tracking Control
 ## LQR Steering Control
 * black line: the planned spline path
 * red circle: the position under lqr control
@@ -124,6 +146,6 @@ This part is based on the bicycle motion model.
 * black line: the planned spline path
 * blue line: the passed path
 * yellow cross: the reference trajectory for MPC    
-(To compile this part, you need to uncomment the related lines in CMakeLists.txt and install [CppAD](https://www.coin-or.org/CppAD/Doc/install.htm) and [IPOPT](https://www.coin-or.org/Ipopt/documentation/node14.html).)
+(To compile this part, you need to uncomment the related lines in CMakeLists.txt and install [CppAD](https://www.coin-or.org/CppAD/Doc/install.htm) and [IPOPT](https://coin-or.github.io/Ipopt/).)
 
 <img src="https://ram-lab.com/file/tailei/gif/mpc.gif" alt="mpc" width="400"/>
